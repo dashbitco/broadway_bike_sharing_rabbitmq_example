@@ -21,7 +21,8 @@ defmodule BroadwayBunny do
              queue: @queue,
              qos: [
                prefetch_count: 50
-             ]
+             ],
+             on_failure: :reject_and_requeue
            ]},
         concurrency: 2
       ],
@@ -36,15 +37,15 @@ defmodule BroadwayBunny do
 
   @impl true
   def handle_message(_, %Message{} = message, _) do
-    IO.puts(message.data)
-
     message
+    |> Message.update_data(fn data -> String.upcase(data) end)
   end
 
   @impl true
   def handle_batch(_, messages, _, _) do
     IO.puts("in batch")
     IO.puts("size: #{length(messages)}")
+    IO.inspect(Enum.map(messages, & &1.data), label: "messages")
 
     messages
   end
