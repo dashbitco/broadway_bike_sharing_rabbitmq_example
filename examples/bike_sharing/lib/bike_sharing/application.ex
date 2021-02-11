@@ -8,7 +8,8 @@ defmodule BikeSharing.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {BikeSharing, []}
+      {BikeSharing, []},
+      BikeSharing.Repo
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

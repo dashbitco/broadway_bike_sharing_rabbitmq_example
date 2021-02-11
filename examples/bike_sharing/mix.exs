@@ -22,7 +22,9 @@ defmodule BikeSharing.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:broadway_rabbitmq, ">= 0.6.0"}
+      {:broadway_rabbitmq, ">= 0.6.0"},
+      {:postgrex, ">= 0.0.0"},
+      {:ecto_sql, "~> 3.5.4"}
     ]
   end
 end

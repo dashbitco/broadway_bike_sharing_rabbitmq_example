@@ -25,3 +25,6 @@ bike_sharing-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+# Log files
+/log

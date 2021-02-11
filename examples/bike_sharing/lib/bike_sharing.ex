@@ -9,6 +9,8 @@ defmodule BikeSharing do
   use Broadway
 
   alias Broadway.Message
+  alias BikeSharing.Repo
+  alias BikeSharing.BikeCoordinate
 
   @queue "bikes_queue"
 
@@ -38,9 +40,15 @@ defmodule BikeSharing do
 
   @impl true
   def handle_message(_, %Message{} = message, _) do
-    # TODO: parse it correctly
-    message
-    |> Message.update_data(fn data -> String.upcase(data) end)
+    Message.update_data(message, fn data ->
+      case String.split(data, ",") do
+        [_, lat, lng, bike_id, _timestamp] ->
+          %{"bike" => bike_id, "point" => [lat, lng]}
+
+        _ ->
+          data
+      end
+    end)
   end
 
   @impl true
@@ -49,6 +57,10 @@ defmodule BikeSharing do
     IO.puts("in batch")
     IO.puts("size: #{length(messages)}")
     IO.inspect(Enum.map(messages, & &1.data), label: "messages")
+
+    {rows, _} = Repo.insert_all(BikeCoordinate, Enum.map(messages, & &1.data))
+
+    IO.inspect(rows, label: "saved rows")
 
     messages
   end
