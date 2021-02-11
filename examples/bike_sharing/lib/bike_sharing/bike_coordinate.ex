@@ -1,9 +1,9 @@
 defmodule BikeSharing.BikeCoordinate do
-  use Ecto.Schema
+  use BikeSharing.Schema
   import Ecto.Changeset
 
   schema "bike_coordinates" do
-    field :point, Ecto.PointType
+    field(:point, Ecto.PointType)
 
     belongs_to(:bike, BikeSharing.Bike)
 

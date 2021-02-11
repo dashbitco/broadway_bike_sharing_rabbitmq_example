@@ -1,9 +1,9 @@
 defmodule BikeSharing.Bike do
-  use Ecto.Schema
+  use BikeSharing.Schema
   import Ecto.Changeset
 
   schema "bikes" do
-    field :model, :string
+    field(:model, :string)
 
     timestamps()
   end

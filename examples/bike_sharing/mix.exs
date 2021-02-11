@@ -7,6 +7,7 @@ defmodule BikeSharing.MixProject do
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
       deps: deps()
     ]
   end
@@ -25,6 +26,14 @@ defmodule BikeSharing.MixProject do
       {:broadway_rabbitmq, ">= 0.6.0"},
       {:postgrex, ">= 0.0.0"},
       {:ecto_sql, "~> 3.5.4"}
+    ]
+  end
+
+  defp aliases do
+    [
+      setup: ["deps.get", "ecto.setup"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"]
     ]
   end
 end
