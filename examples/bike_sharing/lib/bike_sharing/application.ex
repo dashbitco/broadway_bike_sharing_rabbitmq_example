@@ -8,7 +8,7 @@ defmodule BikeSharing.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {BikeSharing, []},
+      {BikeSharing, Application.fetch_env!(:bike_sharing, :rabbitmq_connection)},
       BikeSharing.Repo
     ]
 

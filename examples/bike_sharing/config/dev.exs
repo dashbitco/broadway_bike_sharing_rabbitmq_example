@@ -8,3 +8,10 @@ config :bike_sharing, BikeSharing.Repo,
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
+
+config :bike_sharing, :rabbitmq_connection, host: "localhost"
+
+if File.exists?("/.dockerenv") do
+  config :bike_sharing, BikeSharing.Repo, hostname: "db"
+  config :bike_sharing, :rabbitmq_connection, host: "rabbitmq"
+end

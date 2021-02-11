@@ -27,8 +27,8 @@ same window.
 
 ### Running the app
 
-After creating the queue, with the server running, you can execute the app in another window
-with `iex -S mix`.
+After creating the queue, with RabbitMQ server running, you can execute the app in another window
+with `iex -S mix`. It will be waiting for events.
 
 To simulate events, first open a connection and then fire some messages:
 
@@ -44,9 +44,24 @@ end)
 AMQP.Connection.close(connection)
 ```
 
-You can test with a sample set of data by running the script "publish_sample_events":
+You can test with a sample set of data by running the script "priv/publish_sample_events.exs":
 
     mix run --no-halt priv/publish_sample_events.exs
+
+#### Running with Docker Compose
+
+If you don't want to install PostgreSQL or you don't want to run RabbitMQ by hand, you can try
+to run this project using Docker compose.
+
+Just run: `docker-compose up`
+It will take a while in the first time. You need to run `docker-compose build` everytime you
+change a file in the project.
+
+
+## Conclusion
+
+You can play with the options and the pipeline by editing the `lib/bike_sharing.ex` file.
+In the real world we need to analyse and tweak Broadway options for maximum performance.
 
 That is it! You can find more details and configuration at [Broadway RabbitMQ documentation](https://hexdocs.pm/broadway_rabbitmq/).
 Happy hacking!

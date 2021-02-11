@@ -3,7 +3,7 @@ defmodule BikeSharing do
   This is an app that reads coordinates from bike sharing.
 
   A Broadway example using RabbitMQ that ingest coordinates and save them
-  for future processing.
+  in the database for future processing.
   """
 
   use Broadway
@@ -14,7 +14,7 @@ defmodule BikeSharing do
 
   @queue "bikes_queue"
 
-  def start_link(_opts) do
+  def start_link(opts) do
     Broadway.start_link(__MODULE__,
       name: __MODULE__,
       producer: [
@@ -24,6 +24,9 @@ defmodule BikeSharing do
              queue: @queue,
              qos: [
                prefetch_count: 50
+             ],
+             connection: [
+               host: Keyword.fetch!(opts, :host)
              ],
              on_failure: :reject_and_requeue
            ]},
