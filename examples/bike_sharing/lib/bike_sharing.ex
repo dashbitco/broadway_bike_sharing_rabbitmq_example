@@ -53,6 +53,7 @@ defmodule BikeSharing do
       end)
 
     if is_binary(message.data) do
+      # Move the message to a batcher of errors.
       Message.put_batcher(message, :parse_error)
     else
       message

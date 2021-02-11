@@ -44,5 +44,9 @@ end)
 AMQP.Connection.close(connection)
 ```
 
+You can test with a sample set of data by running the script "publish_sample_events":
+
+    mix run --no-halt priv/publish_sample_events.exs
+
 That is it! You can find more details and configuration at [Broadway RabbitMQ documentation](https://hexdocs.pm/broadway_rabbitmq/).
 Happy hacking!
