@@ -8,11 +8,6 @@ defmodule BikeSharing.Bike do
     timestamps()
   end
 
-  @doc """
-  A bike changeset.
-
-  It validates the model of the bike
-  """
   def changeset(bike, attrs) do
     bike
     |> cast(attrs, [:model])

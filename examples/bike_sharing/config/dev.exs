@@ -11,6 +11,7 @@ config :bike_sharing, BikeSharing.Repo,
 
 config :bike_sharing, :rabbitmq_connection, host: "localhost"
 
+# when started with docker-compose
 if File.exists?("/.dockerenv") do
   config :bike_sharing, BikeSharing.Repo, hostname: "db"
   config :bike_sharing, :rabbitmq_connection, host: "rabbitmq"
