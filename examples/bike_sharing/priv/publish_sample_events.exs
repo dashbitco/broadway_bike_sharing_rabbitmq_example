@@ -1,11 +1,11 @@
-conn_opts = Application.fetch_env!(:bike_sharing, :rabbitmq_connection)
+{_, opts} = Application.fetch_env!(:bike_sharing, :producer_module)
 
 # Wait for RabbitMQ connection on Docker
 if File.exists?("/.dockerenv") do
   Process.sleep(5_000)
 end
 
-{:ok, connection} = AMQP.Connection.open(conn_opts)
+{:ok, connection} = AMQP.Connection.open(Keyword.get(opts, :connection, []))
 {:ok, channel} = AMQP.Channel.open(connection)
 AMQP.Queue.declare(channel, "bikes_queue", durable: true)
 

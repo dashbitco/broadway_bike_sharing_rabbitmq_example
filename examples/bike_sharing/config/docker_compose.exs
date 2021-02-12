@@ -3,9 +3,18 @@ import Config
 # This is an additional config file that take care
 # of adapting the environment to work inside Docker compose.
 
-{broadway_module, opts} = Application.get_env(:bike_sharing, :producer_module)
-
 config :bike_sharing,
-  producer_module: {broadway_module, Keyword.put(opts, :connection, host: "rabbitmq")}
+  producer_module:
+    {BroadwayRabbitMQ.Producer,
+     [
+       queue: "bikes_queue",
+       connection: [
+         host: "rabbitmq"
+       ],
+       qos: [
+         prefetch_count: 50
+       ],
+       on_failure: :reject_and_requeue
+     ]}
 
 config :bike_sharing, BikeSharing.Repo, hostname: "db"

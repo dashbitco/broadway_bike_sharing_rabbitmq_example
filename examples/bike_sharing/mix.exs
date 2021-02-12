@@ -26,7 +26,9 @@ defmodule BikeSharing.MixProject do
     [
       {:broadway_rabbitmq, ">= 0.6.0"},
       {:postgrex, ">= 0.0.0"},
-      {:ecto_sql, "~> 3.5.4"}
+      {:ecto_sql, "~> 3.5.4"},
+      {:jason, ">= 0.0.0"},
+      {:geo_postgis, "~> 3.3"}
     ]
   end
 

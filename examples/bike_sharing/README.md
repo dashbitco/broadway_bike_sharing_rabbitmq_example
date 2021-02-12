@@ -25,6 +25,8 @@ And then, we create our queue:
 You can see that the queue "bikes_queue" was created by running `rabbitmqctl list_queues` in the
 same window.
 
+For this example you need the "postgis" extention for PostgreSQL.
+
 ### Running the app
 
 After creating the queue, with RabbitMQ server running, you can execute the app in another window

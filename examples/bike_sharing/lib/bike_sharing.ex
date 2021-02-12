@@ -36,7 +36,10 @@ defmodule BikeSharing do
       Message.update_data(message, fn data ->
         case String.split(data, ",") do
           [_, lat, lng, bike_id, _timestamp] ->
-            %{bike_id: String.to_integer(bike_id), point: [lat, lng]}
+            lat = String.to_float(lat)
+            lng = String.to_float(lng)
+
+            %{bike_id: String.to_integer(bike_id), point: %Geo.Point{coordinates: {lat, lng}}}
 
           _ ->
             data
