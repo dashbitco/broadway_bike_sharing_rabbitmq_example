@@ -53,7 +53,14 @@ You can test with a sample set of data by running the script "priv/publish_sampl
 If you don't want to install PostgreSQL or you don't want to run RabbitMQ by hand, you can try
 to run this project using Docker compose.
 
-Just run: `docker-compose up`
+First create the database:
+
+    docker-compose run app mix setup
+
+An then run the application:
+
+    docker-compose up
+
 It will take a while in the first time. You need to run `docker-compose build` everytime you
 change a file in the project.
 
