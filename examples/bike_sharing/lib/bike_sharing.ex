@@ -7,6 +7,7 @@ defmodule BikeSharing do
   """
 
   use Broadway
+  require Logger
 
   alias Broadway.Message
   alias BikeSharing.Repo
@@ -65,9 +66,9 @@ defmodule BikeSharing do
 
   @impl true
   def handle_batch(:default, messages, _, _) do
-    IO.puts("in batch")
-    IO.puts("size: #{length(messages)}")
-    IO.inspect(Enum.map(messages, & &1.data), label: "messages")
+    Logger.debug("in default batcher")
+    Logger.debug(fn -> "size: #{length(messages)}" end)
+    Enum.map(messages, &Logger.debug("message: #{inspect(&1.data)}"))
 
     {rows, _} =
       Repo.insert_all(
@@ -75,17 +76,17 @@ defmodule BikeSharing do
         Enum.map(messages, &Map.put(&1.data, :inserted_at, DateTime.utc_now()))
       )
 
-    IO.inspect(rows, label: "saved rows")
+    Logger.debug("saved rows: #{rows}")
 
     messages
   end
 
   def handle_batch(:parse_error, messages, _, _) do
-    IO.puts("in parse error batch")
-    IO.puts("size: #{length(messages)}")
-    IO.inspect(Enum.map(messages, & &1.data), label: "messages")
+    Logger.info("in parse error batcher")
+    Logger.info(fn -> "size: #{length(messages)}" end)
+    Logger.info("the following messages with errors will be dropped")
 
-    IO.puts("messages with error will be dropped")
+    Enum.map(messages, &Logger.info("message: #{inspect(&1.data)}"))
 
     messages
   end
