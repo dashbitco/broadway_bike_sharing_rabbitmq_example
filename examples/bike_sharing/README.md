@@ -63,5 +63,6 @@ change a file in the project.
 You can play with the options and the pipeline by editing the `lib/bike_sharing.ex` file.
 In the real world we need to analyse and tweak Broadway options for maximum performance.
 
-That is it! You can find more details and configuration at [Broadway RabbitMQ documentation](https://hexdocs.pm/broadway_rabbitmq/).
+That is it! You can find more details and configuration at [Broadway RabbitMQ documentation](https://hexdocs.pm/broadway_rabbitmq/)
+and [Broadway RabbitMQ Guide](https://hexdocs.pm/broadway/rabbitmq.html).
 Happy hacking!
