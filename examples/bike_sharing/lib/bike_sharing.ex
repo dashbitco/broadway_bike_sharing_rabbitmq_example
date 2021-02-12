@@ -13,24 +13,11 @@ defmodule BikeSharing do
   alias BikeSharing.Repo
   alias BikeSharing.BikeCoordinate
 
-  @queue "bikes_queue"
-
-  def start_link(opts) do
+  def start_link(_opts) do
     Broadway.start_link(__MODULE__,
       name: __MODULE__,
       producer: [
-        module:
-          {BroadwayRabbitMQ.Producer,
-           [
-             queue: @queue,
-             qos: [
-               prefetch_count: 50
-             ],
-             connection: [
-               host: Keyword.fetch!(opts, :host)
-             ],
-             on_failure: :reject_and_requeue
-           ]},
+        module: Application.fetch_env!(:bike_sharing, :producer_module),
         concurrency: 2
       ],
       processors: [
