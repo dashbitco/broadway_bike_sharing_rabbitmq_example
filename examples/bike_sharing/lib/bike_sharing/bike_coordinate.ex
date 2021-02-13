@@ -3,11 +3,11 @@ defmodule BikeSharing.BikeCoordinate do
   import Ecto.Changeset
 
   schema "bike_coordinates" do
-    field(:point, Geo.PostGIS.Geometry)
+    field :point, Geo.PostGIS.Geometry
 
-    belongs_to(:bike, BikeSharing.Bike)
+    belongs_to :bike, BikeSharing.Bike
 
-    timestamps(updated_at: false)
+    timestamps updated_at: false
   end
 
   def changeset(coordinate, attrs) do
