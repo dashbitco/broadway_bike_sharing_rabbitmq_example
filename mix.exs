@@ -25,6 +25,7 @@ defmodule BikeSharing.MixProject do
   defp deps do
     [
       {:broadway_rabbitmq, ">= 0.6.0"},
+      {:broadway, github: "dashbitco/broadway", override: true},
       {:postgrex, ">= 0.0.0"},
       {:ecto_sql, "~> 3.5.4"},
       {:jason, ">= 0.0.0"},
