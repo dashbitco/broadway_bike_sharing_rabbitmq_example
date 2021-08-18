@@ -27,9 +27,9 @@ defmodule BikeSharing.MixProject do
       {:broadway_rabbitmq, ">= 0.6.0"},
       {:broadway, github: "dashbitco/broadway", override: true},
       {:postgrex, ">= 0.0.0"},
-      {:ecto_sql, "~> 3.5.4"},
+      {:ecto_sql, "~> 3.6.2"},
       {:jason, ">= 0.0.0"},
-      {:geo_postgis, "~> 3.3"}
+      {:geo_postgis, "~> 3.4"}
     ]
   end
 
