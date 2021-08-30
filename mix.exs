@@ -24,8 +24,7 @@ defmodule BikeSharing.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:broadway_rabbitmq, github: "dashbitco/broadway_rabbitmq"},
-      {:broadway, github: "dashbitco/broadway", override: true},
+      {:broadway_rabbitmq, "~> 0.7.0"},
       {:postgrex, ">= 0.0.0"},
       {:ecto_sql, "~> 3.6.2"},
       {:jason, ">= 0.0.0"},
