@@ -21,11 +21,11 @@ defmodule BikeSharing do
         concurrency: 2
       ],
       processors: [
-        default: [concurrency: 50]
+        default: [concurrency: 8]
       ],
       batchers: [
         default: [batch_size: 10, batch_timeout: 1500, concurrency: 5],
-        parse_error: [batch_size: 10, concurrency: 2, batch_timeout: 1500]
+        parse_err: [batch_size: 10, concurrency: 2, batch_timeout: 1500]
       ]
     )
   end
@@ -48,7 +48,7 @@ defmodule BikeSharing do
 
     if is_binary(message.data) do
       # Move the message to a batcher of errors.
-      Message.put_batcher(message, :parse_error)
+      Message.put_batcher(message, :parse_err)
     else
       message
     end
@@ -71,7 +71,7 @@ defmodule BikeSharing do
     messages
   end
 
-  def handle_batch(:parse_error, messages, _, _) do
+  def handle_batch(:parse_err, messages, _, _) do
     Logger.info("in parse error batcher")
     Logger.info(fn -> "size: #{length(messages)}" end)
     Logger.info("the following messages with errors will be dropped")
